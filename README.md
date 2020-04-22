@@ -5,7 +5,7 @@
 ![alt text](https://img.shields.io/badge/nodetelegrambotapi-0.1-red)
 ![alt text](https://img.shields.io/badge/momentjs-2.24-green)
 
-This beta version f 2 Factor Auth library for Javascript. This library will have 3 function
+This is beta version of 2 Factor Auth open API. 
 
 * `Generate Token` 
 * `Send Token to Telegram`
