@@ -52,3 +52,23 @@ exports.update = (req, res) => {
 exports.delete = (req, res) => {
 
 };
+
+async function verify(req, res){
+    const data = await Token.find({ user: req.body.user, token:req.body.token, status: "active"})
+    if (data.length){
+        console.log(data)
+        return res.send(data)
+    }
+    else if(!data.length){
+        return res.status(401).send({
+            message: "token active not found " + req.body.user
+        });
+    }
+    else{
+        return res.status(500).send({
+            message: "Error retrieving token with id " + req.body.user
+        });
+    }
+}
+module.exports.verify = verify;
+

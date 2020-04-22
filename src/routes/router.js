@@ -17,5 +17,5 @@ module.exports = (app) => {
     app.delete('/token/:noteId', token.delete);
 
     // Verify token
-    app.post('/token/:noteId', token.delete);
+    app.post('/token/verify', token.verify);
 }
