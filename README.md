@@ -1,5 +1,6 @@
 ## Overview
 ![alt text](https://img.shields.io/badge/mongoose-5.9-blue)
+![alt text](https://img.shields.io/badge/mongoDB-4.2-yellow)
 ![alt text](https://img.shields.io/badge/express-4.17-green)
 ![alt text](https://img.shields.io/badge/nodetelegrambotapi-0.1-red)
 
