@@ -1,6 +1,7 @@
 const Token = require('../models/token');
 const telegram = require('./telegram');
 
+
 // Create and Save a new Note
 exports.create = (req, res) => {
     // Validate request
@@ -10,14 +11,16 @@ exports.create = (req, res) => {
         });
     }
 
-    // Create a Note
+
+    // Create a Token
     var val = Math.floor(1000 + Math.random() * 9000);
     const token = new Token({
         token: val,
-        user: req.body.user
+        user: req.body.user,
+        status: "active"
     });
 
-    // Save Note in the database
+    // Save Token in the database
     token.save()
     .then(data => {
         telegram.sendToken(val,req.body.user);
@@ -42,7 +45,7 @@ exports.findOne = (req, res) => {
 
 // Update a note identified by the noteId in the request
 exports.update = (req, res) => {
-
+    Token.find({status: 'active'})
 };
 
 // Delete a note with the specified noteId in the request
