@@ -1,6 +1,8 @@
 const express = require('express');
 const bodyParser = require('body-parser');
-const router = require('./src/routes/router')
+const router = require('./src/routes/router');
+const scheduler = require('./src/services/inactivetoken');
+
 // create express app
 const app = express();
 
@@ -30,7 +32,13 @@ app.get('/', (req, res) => {
 
 router(app);
 
+//scheduler service
+scheduler.jobscheduler();
+
+
 // listen for requests
 app.listen(3000, () => {
     console.log("Server is listening on port 3000");
 });
+
+

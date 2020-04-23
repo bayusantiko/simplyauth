@@ -5,10 +5,7 @@ module.exports = (app) => {
     app.post('/token', token.create);
 
     // Retrieve all token
-    app.get('/token', token.findAll);
-
-    // Retrieve a single Note with noteId
-    app.get('/token/:noteId', token.findOne);
+    app.get('/token', token.find);
 
     // Update a Note with noteId
     app.put('/token/:noteId', token.update);
@@ -18,4 +15,7 @@ module.exports = (app) => {
 
     // Verify token
     app.post('/token/verify', token.verify);
+
+    // Expires token
+    app.get('/token/expires', token.expires);
 }

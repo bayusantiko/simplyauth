@@ -5,7 +5,7 @@ const TokenSchema = mongoose.Schema({
     token: { type: String, unique: true },
     user: String,
     status: String,
-    expiredAt: { type: Date, default: moment().add(7,'Hours').add(30,'Minutes') },
+    expiredAt: { type: Date, default: moment().add(7,'Hours').add(10,'Minutes') },
 }, {
     timestamps: true
 });
