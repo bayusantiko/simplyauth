@@ -70,6 +70,6 @@ Token will be expired in 10 minutes
 ##### 401 Unauthorized
 ```json
 {
-    "message": "token active not found -400016164"
+    "message": "token active not found"
 }
 ```
