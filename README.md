@@ -18,6 +18,9 @@ This is beta version of 2 Factor Auth open API.
 
 ## API
 ### Generate & Send Token
+
+Token will be expired in 10 minutes
+
 > METHOD : POST
 > Endpoint : http://host:port/token
 #### Request
