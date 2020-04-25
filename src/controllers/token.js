@@ -1,6 +1,8 @@
 const Token = require('../models/token');
 const telegram = require('./telegram');
 const moment = require('moment');
+var randomNumber = require("random-number-csprng");
+var Promise = require("bluebird");
 
 
 // Create and Save a new token
@@ -11,9 +13,33 @@ exports.create = (req, res) => {
             message: "user cannot be empty"
         });
     }
+    //Create CSPRNG Token
+    Promise.try(function() {
+        return randomNumber(1000, 9999);
+    }).then(function(number) {
+        //console.log("Your random number:", number);
+        const token = new Token({
+            token: number,
+            user: req.body.user,
+            status: "active"
+        });
+        // Save Token in the database
+        token.save()
+        .then(data => {
+            telegram.sendToken(number,req.body.user);
+            res.send(data);
+        }).catch(err => {
+            res.status(500).send({
+                message: err.message || "Some error occurred while creating the token."
+            });
+        });
+    }).catch({code: "RandomGenerationError"}, function(err) {
+        //console.log("Something went wrong!");
+    });
 
     // Create a Token
-    var val = Math.floor(1000 + Math.random() * 9000);
+    //var val = Math.floor(1000 + Math.random() * 9000);
+    /*
     const token = new Token({
         token: val,
         user: req.body.user,
@@ -29,7 +55,7 @@ exports.create = (req, res) => {
         res.status(500).send({
             message: err.message || "Some error occurred while creating the token."
         });
-    });
+    });*/
 };
 
 async function find(req, res){
