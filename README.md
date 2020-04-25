@@ -5,7 +5,7 @@
 ![alt text](https://img.shields.io/badge/nodetelegrambotapi-0.1-red)
 ![alt text](https://img.shields.io/badge/momentjs-2.24-green)
 
-This is beta version of 2 Factor Auth open API. 
+This is beta version of 2 Factor Auth open API using node js and telegram bot. 
 
 * `Generate Token` 
 * `Send Token to Telegram`
@@ -14,7 +14,12 @@ This is beta version of 2 Factor Auth open API.
 
 ## Version
 
-![alt text](https://img.shields.io/badge/ver-0.1-blue)
+![alt text](https://img.shields.io/badge/ver-0.8-blue)
+
+## Usage
+1. To get token, you will need to interact with our telegram bot first, just type `/start` to our bot. 
+2. Then get your `chat_id` by interacting with `get id` bot and type `/start`
+3. Your `chat_id` will be used as input parameter in APIs
 
 ## API
 ### Generate & Send Token
