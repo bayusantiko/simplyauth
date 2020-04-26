@@ -10,7 +10,7 @@ describe('/GET token', () => {
           .get('/token')
           .end(function(err, res){
             expect(res).to.have.status(200);
-            expect(res).to.have.deep.members([{user: "70736768"}]);
+            expect(res.body[0]).to.have.property("token")
             done();
           });
       });
