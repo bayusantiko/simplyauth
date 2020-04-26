@@ -1,0 +1,18 @@
+var chai = require('chai');
+var chaiHttp = require('chai-http');
+var server = require('../8020_simplyauth');
+const { expect } = chai;
+
+chai.use(chaiHttp);
+describe('/GET token', () => {
+    it('should list ALL token on /token GET', function(done) {
+        chai.request(server)
+          .get('/token')
+          .end(function(err, res){
+            expect(res).to.have.status(200);
+            expect(res).to.have.deep.members([{user: "70736768"}]);
+            done();
+          });
+      });
+      
+});

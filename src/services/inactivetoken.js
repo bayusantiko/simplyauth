@@ -12,7 +12,7 @@ function jobscheduler(){
         
         location = path.join('/var/www/html','simplyauth','log', filename)
         //write to log file
-        writefile(location,"Run Cron Job at "+moment().format()+"\n")
+        //writefile(location,"Run Cron Job at "+moment().format()+"\n")
        token.expires();
       });
     

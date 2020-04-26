@@ -43,4 +43,4 @@ app.listen(8020, () => {
     console.log("Server is listening on port 8020");
 });
 
-
+module.exports = app;

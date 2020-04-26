@@ -3,6 +3,8 @@ const telegram = require('./telegram');
 const moment = require('moment');
 var randomNumber = require("random-number-csprng");
 var Promise = require("bluebird");
+const writefile = require('../services/writefile');
+const filename = 'error.txt'
 
 
 // Create and Save a new token
@@ -29,6 +31,9 @@ exports.create = (req, res) => {
             telegram.sendToken(number,req.body.user);
             res.send(data);
         }).catch(err => {
+            location = path.join('/var/www/html','simplyauth','log', filename)
+            //write to log file
+            writefile(location,"Error generate token : "+ err.message+" "+moment().format()+"\n")
             res.status(500).send({
                 message: err.message || "Some error occurred while creating the token."
             });
@@ -59,7 +64,7 @@ exports.create = (req, res) => {
 };
 
 async function find(req, res){
-   const data = await Token.find({ expiredAt:{ $lte: moment().add(7,'Hours') }, status: "active"})
+   const data = await Token.find({})
    if (data.length){
     //console.log(data)
     return res.send(data)
@@ -119,6 +124,9 @@ async function expires(){
          }
          else{
              console.log("error get data")
+             location = path.join('/var/www/html','simplyauth','log', filename)
+             //write to log file
+             writefile(location,"Error verify token at: "+moment().format()+"\n")
          }
     }
     catch(err){
