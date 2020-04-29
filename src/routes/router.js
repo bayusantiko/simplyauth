@@ -1,5 +1,6 @@
 module.exports = (app) => {
     const token = require('../controllers/token');
+    const login = require('../controllers/login');
 
     // Create a new Note
     app.post('/token', token.create);
@@ -18,4 +19,10 @@ module.exports = (app) => {
 
     // Expires token
     app.get('/token/expires', token.expires);
+
+    // handling UI
+    app.get('/', function (req, res) {
+        res.send('respond with a resource');
+    });
+    app.post('/login', login.login);
 }

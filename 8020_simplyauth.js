@@ -2,11 +2,19 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const router = require('./src/routes/router');
 const scheduler = require('./src/services/inactivetoken');
+var path = require('path');
 
 
 
 // create express app
 const app = express();
+
+// view engine setup
+app.set('views', path.join(__dirname, 'src','views'));
+app.set('view engine', 'pug');
+
+//set public dir for stylesheets and images
+app.use(express.static(path.join(__dirname, 'src','public')));
 
 // parse requests of content-type - application/x-www-form-urlencoded
 app.use(bodyParser.urlencoded({ extended: true }))
@@ -29,8 +37,10 @@ mongoose.connect(dbConfig.url, {
 
 // define a simple route
 app.get('/', (req, res) => {
-    res.json("Hello simplyauth");
+    res.render('index',{ title: 'Homepage'});
 });
+
+
 
 router(app);
 
@@ -42,5 +52,6 @@ scheduler.jobscheduler();
 app.listen(8020, () => {
     console.log("Server is listening on port 8020");
 });
+
 
 module.exports = app;
