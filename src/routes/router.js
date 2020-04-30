@@ -2,8 +2,11 @@ module.exports = (app) => {
     const token = require('../controllers/token');
     const login = require('../controllers/login');
 
-    // Create a new Note
+    // Create a new token and  send to telegram
     app.post('/token', token.create);
+
+    // Create a new token and send to email
+    app.post('/token/email', token.sendEmail);
 
     // Retrieve all token
     app.get('/token', token.find);

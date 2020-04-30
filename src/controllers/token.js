@@ -1,5 +1,6 @@
 const Token = require('../models/token');
 const telegram = require('./telegram');
+const email = require('./email');
 const moment = require('moment');
 var randomNumber = require("random-number-csprng");
 var Promise = require("bluebird");
@@ -145,3 +146,39 @@ async function expires(){
       });*/
 }
 module.exports.expires = expires;
+
+// Create and Save a new token and send to email
+exports.sendEmail = (req, res) => {
+    // Validate request
+    if(!req.body.user) {
+        return res.status(400).send({
+            message: "user cannot be empty"
+        });
+    }
+    //Create CSPRNG Token
+    Promise.try(function() {
+        return randomNumber(1000, 9999);
+    }).then(function(number) {
+        //console.log("Your random number:", number);
+        const token = new Token({
+            token: number,
+            user: req.body.user,
+            status: "active"
+        });
+        // Save Token in the database
+        token.save()
+        .then(data => {
+            email.sendEmail(number,req.body.user);
+            res.send(data);
+        }).catch(err => {
+            location = path.join('/var/www/html','simplyauth','log', filename)
+            //write to log file
+            writefile(location,"Error generate token : "+ err.message+" "+moment().format()+"\n")
+            res.status(500).send({
+                message: err.message || "Some error occurred while creating the token."
+            });
+        });
+    }).catch({code: "RandomGenerationError"}, function(err) {
+        //console.log("Something went wrong!");
+    });
+}
