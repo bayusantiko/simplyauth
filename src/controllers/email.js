@@ -21,8 +21,8 @@ exports.sendEmail = (token, user) => {
       var mailOptions = {
         from: '910087@telkom.co.id',
         to: user,
-        subject: 'Sending Email using Node.js',
-        text: `${token}`
+        subject: 'Token',
+        html: `<p><h1>${token}</h1></p><p><b>Token will be exipred in 10 minutes<b><p>`
       };
       
       transporter.sendMail(mailOptions, function(error, info){
